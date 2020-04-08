@@ -23,7 +23,7 @@ class CreateStudentsTable extends Migration
             $table->integer('year');
             $table->integer('student_id');
             $table->string('province');
-            $table->integer('satatus');
+            $table->integer('status');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                   ->references('id')
@@ -31,6 +31,7 @@ class CreateStudentsTable extends Migration
                   ->onDelete('cascade');
             $table->timestamps();
         });
+        
     }
 
     /**

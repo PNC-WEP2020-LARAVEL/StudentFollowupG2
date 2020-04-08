@@ -23,7 +23,7 @@
             $role_id = DB::table('role_user')->where('user_id',Auth::user()->id)->first();
             $role_name = DB::table('roles')->where('id',$role_id->role_id)->first();
         ?>
-      <?php if($role_name->name == "admin") { ?>
+      
         {{-- <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
@@ -41,6 +41,7 @@
             </li>
           </ul>
         </li> --}}
+        <?php if($role_name->name == "admin") { ?>
         <li class="nav-item has-treeview">
           <a href="{{route('view')}}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
@@ -50,8 +51,9 @@
             </p>
           </a>
         </li>
+        <?php } ?>
         <li class="nav-item has-treeview">
-          <a href="show" class="nav-link">
+          <a href="{{url('show')}}" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
               StudentList
@@ -59,7 +61,7 @@
             </p>
           </a>
         </li>
-      <?php } ?>
+      
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

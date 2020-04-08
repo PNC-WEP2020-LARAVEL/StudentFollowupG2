@@ -24,11 +24,12 @@ class UserController extends Controller
    
 
     public function view(){
-        $users = DB::table('role_user')
-            ->select('users.*', 'roles.name as role_name')
-            ->join('users', 'role_user.user_id', '=', 'users.id')
-            ->join('roles', 'role_user.role_id', '=', 'roles.id')
-            ->get();
+        // $users = DB::table('role_user')
+        //     ->select('users.*', 'roles.name as role_name')
+        //     ->join('users', 'role_user.user_id', '=', 'users.id')
+        //     ->join('roles', 'role_user.role_id', '=', 'roles.id')
+        //     ->get();
+        $users = User::all();
         return view('admin.user.view',compact('users'));
     }
 
@@ -47,6 +48,9 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:255', 'unique:users'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'role' => ['required'],
+                'position'=>['required','string'],
+                'address'=>['required','string'],
+                'status'=>['required','integer'],
                 'password' => ['required', 'string', 'min:4'],
                 'password_confirmation' => 'required|required_with:password|same:password',
             ]);
@@ -55,6 +59,9 @@ class UserController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
+                    'position'=>$request->position,
+                    'address'=>$request->address,
+                    'status'=>$request->status
                 ]);
                 if ($request->role) {
                     $user_id = User::latest('id')->first();
@@ -115,7 +122,9 @@ class UserController extends Controller
                         ->update([
                             'name' => $request->name,
                             'email' => $request->email,
-                            'status' => $request->status
+                            'status' => $request->status,
+                            'position'=>$request->position,
+                            'address'=>$request->address
                         ]);
                     //Update role Admin
                     if ($request->role) {
@@ -138,7 +147,8 @@ class UserController extends Controller
                             'name' => $request->name,
                             'email' => $request->email,
                             'password' => Hash::make($request->password),
-                            'status' => $request->status
+                            'status' => $request->status,
+                            'position'=>$request->position
                         ]);
                     if ($request->role) {
                         DB::table('role_user')->where('user_id', $request->id)
@@ -174,5 +184,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * Show student uder mentor of each tutor
+     */
+    public function mentorStudent($id){
+        $tutor = User::find($id);
+        $students = $tutor->students;
+        return view('admin.user.viewStudentMentor',compact('students'));
     }
 }

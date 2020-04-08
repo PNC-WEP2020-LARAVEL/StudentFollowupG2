@@ -24,20 +24,32 @@
                                     <th>Id</th>
                                     <th>User Name</th>
                                     <th>Email</th>
-                                    {{-- <th>Role Type</th> --}}
-                                    <th>Created At</th>
+                                    <th>Role Type</th>
+                                    <th>Position</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $item)
+                                
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->email}}</td>
-                                    {{-- <td>{{$item->role_name}}</td> --}}
-                                    <td>{{$item->created_at}}</td>
-                     
+                                    @foreach($item->roles as $role)
+                                        <td>{{$role->name}}</td>
+                                    @endforeach
+                                    <td>{{$item->position}}</td>
+                                    <td>{{$item->address}}</td>
+                                    <td><?php 
+                                        if($item->status == 1){
+                                            echo "Active";
+                                        }else{
+                                            echo "Inactive";
+                                        }
+                                    ?></td>
                                     <td>
                                         <a href="{{url('users/edit/'.$item->id)}}"><i class="fas fa-edit"></i></a>
                                     </td>

@@ -104,9 +104,25 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select class="form-control" name="status">
-                                            <option value="Active" @if($user->status == "Active") Selected @endif>Active</option>
-                                            <option value="Inactive" @if($user->status == "Inactive") Selected @endif>Inactive</option>
+                                            <option value="1" @if($user->status == "Active") Selected @endif>Active</option>
+                                            <option value="0" @if($user->status == "Inactive") Selected @endif>Inactive</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Position</label>
+                                        <select class="form-control" name="position">
+                                            <option value="Training Manager" @if($user->position == "Training Manager") Selected @endif>Training Manager</option>
+                                            <option value="Trainer" @if($user->position == "Trainer") Selected @endif>Trainer</option>
+                                            <option value="Educator" @if($user->position == "Educator") Selected @endif>Educator</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="address" value="{{$user->address}}" class="form-control" name="address" placeholder="Enter ...">
                                     </div>
                                 </div>
                             </div>
