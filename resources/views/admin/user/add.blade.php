@@ -57,8 +57,7 @@
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" class="form-control" name="password"
-                                            placeholder="Enter ...">
+                                        <input type="password" class="form-control" name="password" placeholder="Enter ...">
                                         @error('password')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -69,8 +68,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Confirm Password</label>
-                                        <input type="password" class="form-control" name="password_confirmation"
-                                            placeholder="Enter ...">
+                                        <input type="password" class="form-control" name="password_confirmation" placeholder="Enter ...">
                                         @error('password_confirmation')
                                         <span class="text-danger">
                                             {{ $message }}
@@ -101,11 +99,31 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select class="form-control" name="status">
+                                            <option value="">--Select--</option>
                                             <option value="1"> Active</option>
                                             <option value="0"> Inactive</option>
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Position</label>
+                                        <select class="form-control" name="position">
+                                            <option value="">--Select--</option>
+                                            <option value="Training Manager"> Training Manager</option>
+                                            <option value="Trainer"> Trainer</option>
+                                            <option value="Educator">Educator</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="address" class="form-control" name="address" placeholder="Enter ...">
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <!-- /.card-body -->

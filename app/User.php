@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PhpParser\Node\Expr\FuncCall;
 use App\Role;
+use App\Student;
+use App\Comment;
 
 class User extends Authenticatable
 {
@@ -18,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','position','address','status'
     ];
 
     /**
@@ -71,5 +73,12 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return null !== $this->roles()->where('name', $role)->first();
+    }
+    
+    public function students(){
+        return $this->hasMany(Student::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 }
